@@ -29,9 +29,10 @@ public class PlayerMovement : MonoBehaviour{
         Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
         bool grounded = false; //changes to true if the player is on the ground and majes them 
         //able to jump.
-        
-        //detects if the player is on the ground or in the air.
-        if (hit != null) {
+        if (!Mathf.Approximately(deltaX, 0)) {
+            transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1); //when moving scale postive or negative 1 to face left or right.
+        }                                                                  //detects if the player is on the ground or in the air.
+            if (hit != null) {
             grounded = true;
         }
         //Creates an jump impulse when the space key is pressed. 
@@ -41,7 +42,7 @@ public class PlayerMovement : MonoBehaviour{
         }
         //checks if the platform is moving or not.
         MovingPlatforms platform = null;
-        if (platform != null){
+        if (hit != null) {
             platform = hit.GetComponent<MovingPlatforms>(); 
         }
         //either attach the player to platform or clear transform.parent.
@@ -51,8 +52,13 @@ public class PlayerMovement : MonoBehaviour{
             transform.parent = null;
         }
         _anim.SetFloat("speed", Mathf.Abs(deltaX)); //speed greater than zero.
-        if (!Mathf.Approximately(deltaX, 0)){
-            transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1); //when moving scale postive or negative 1 to face left or right.
+        Vector3 pScale = Vector3.one;
+        if (platform != null) {
+            pScale = platform.transform.localScale;
+        }
+        if (deltaX != 0) {
+            transform.localScale = new Vector3(
+                Mathf.Sign(deltaX) / pScale.x, 1 / pScale.y, 1);
         }
     }
 }
