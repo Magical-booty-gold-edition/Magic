@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour{
         if (hit != null) {
             grounded = true;
         }
+        //Creates an jump impulse when the space key is pressed. 
+        _body.gravityScale = grounded && deltaX == 0 ? 0 : 1;
         if (grounded && Input.GetKeyDown(KeyCode.Space)) {
             _body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
