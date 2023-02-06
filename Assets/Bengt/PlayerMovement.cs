@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 
 public class PlayerMovement : MonoBehaviour{
-    public float speed = 500.0f;
+    public float speed = 501.0f;
     public float jumpForce = 12.0f;
 
     private Rigidbody2D _body;
@@ -47,8 +47,7 @@ public class PlayerMovement : MonoBehaviour{
         //either attach the player to platform or clear transform.parent.
         if (platform != null) {
             transform.parent = platform.transform;
-        }
-        else {
+        } else {
             transform.parent = null;
         }
         _anim.SetFloat("speed", Mathf.Abs(deltaX)); //speed greater than zero.
