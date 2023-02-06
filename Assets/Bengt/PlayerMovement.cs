@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 
 public class PlayerMovement : MonoBehaviour{
-    public float speed = 500.0f;
+    public float speed = 250.0f;
     public float jumpForce = 12.0f;
 
     private Rigidbody2D _body;
