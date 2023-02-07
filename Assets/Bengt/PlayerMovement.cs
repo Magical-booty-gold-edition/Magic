@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour{
     private Rigidbody2D _body;
     private Animator _anim;
     private BoxCollider2D _box;
-    private AudioSource _jumpsound;
+    public AudioSource _jumpsound;
     
     // Start is called before the first frame update
     void Start() {
