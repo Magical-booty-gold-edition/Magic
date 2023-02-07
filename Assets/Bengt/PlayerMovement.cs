@@ -10,12 +10,14 @@ public class PlayerMovement : MonoBehaviour{
     private Rigidbody2D _body;
     private Animator _anim;
     private BoxCollider2D _box;
+    private AudioSource _jumpsound;
     
     // Start is called before the first frame update
     void Start() {
         _body = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _box = GetComponent<BoxCollider2D>();
+        _jumpsound = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update() {
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour{
         _body.gravityScale = grounded && deltaX == 0 ? 0 : 1;
         if (grounded && Input.GetKeyDown(KeyCode.Space)) {
             _body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            _jumpsound.Play();
         }
         //checks if the platform is moving or not.
         MovingPlatforms platform = null;
