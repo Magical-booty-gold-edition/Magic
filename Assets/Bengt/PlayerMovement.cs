@@ -21,9 +21,8 @@ public class PlayerMovement : MonoBehaviour{
     }
     // Update is called once per frame
     void Update() {
-        float deltaX = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        Vector2 movement = new Vector2(deltaX, _body.velocity.y);
-        _body.velocity = movement;
+        float M = Input.GetAxis("Horizontal");
+        GetComponent<Rigidbody2D>().velocity = Vector2.right * M * speed;
         Vector3 max = _box.bounds.max;
         Vector3 min = _box.bounds.min;
         Vector2 corner1 = new Vector2(min.x, min.y - .1f);
@@ -31,14 +30,14 @@ public class PlayerMovement : MonoBehaviour{
         Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
         bool grounded = false; //changes to true if the player is on the ground and majes them 
         //able to jump.
-        if (!Mathf.Approximately(deltaX, 0)) {
-            transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1); //when moving scale postive or negative 1 to face left or right.
+        if (!Mathf.Approximately(M, 0)) {
+            transform.localScale = new Vector3(Mathf.Sign(M), 1, 1); //when moving scale postive or negative 1 to face left or right.
         }                                                                  //detects if the player is on the ground or in the air.
             if (hit != null) {
             grounded = true;
         }
         //Creates an jump impulse when the space key is pressed. 
-        _body.gravityScale = grounded && deltaX == 0 ? 0 : 1;
+        _body.gravityScale = grounded && M == 0 ? 0 : 1;
         if (grounded && Input.GetKeyDown(KeyCode.Space)) {
             _body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             _jumpsound.Play();
@@ -54,14 +53,18 @@ public class PlayerMovement : MonoBehaviour{
         } else {
             transform.parent = null;
         }
-        _anim.SetFloat("speed", Mathf.Abs(deltaX)); //speed greater than zero.
+        _anim.SetFloat("speed", Mathf.Abs(M)); //speed greater than zero.
         Vector3 pScale = Vector3.one;
         if (platform != null) {
             pScale = platform.transform.localScale;
         }
-        if (deltaX != 0) {
+        if (M != 0) {
             transform.localScale = new Vector3(
-                Mathf.Sign(deltaX) / pScale.x, 1 / pScale.y, 1);
+                Mathf.Sign(M) / pScale.x, 1 / pScale.y, 1);
         }
+    }
+    private void FixedUpdate()
+    {
+        
     }
 }
