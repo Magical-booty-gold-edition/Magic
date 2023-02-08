@@ -21,11 +21,14 @@ public class PlayerMovement : MonoBehaviour{
     }
     // Update is called once per frame
     void Update() {
-        float M = Input.GetAxis("Horizontal");
-        GetComponent<Rigidbody2D>().velocity = Vector2.right * M * speed;
+        float M = Input.GetAxis("Horizontal") * speed;
+         Vector2 movement = new Vector2(M, _body.velocity.y);
+        _body.velocity = movement;
+        //float M = Input.GetAxis("Horizontal");
+        // GetComponent<Rigidbody2D>().velocity = Vector2.right * M * speed;
         Vector3 max = _box.bounds.max;
         Vector3 min = _box.bounds.min;
-        Vector2 corner1 = new Vector2(min.x, min.y - .1f);
+        Vector2 corner1 = new Vector2(max.x, min.y - .1f);
         Vector2 corner2 = new Vector2(min.x, min.y - .2f);
         Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
         bool grounded = false; //changes to true if the player is on the ground and majes them 
