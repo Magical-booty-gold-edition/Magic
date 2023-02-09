@@ -66,8 +66,9 @@ public class PlayerMovement : MonoBehaviour{
                 Mathf.Sign(M) / pScale.x, 1 / pScale.y, 1);
         }
     }
-    private void FixedUpdate()
-    {
-        
-    }
+  //  private void OnCollisionEnter2D(Collision2D collision) {
+    //    if (Collider2D.gameObject.CompareTag("Spring")) {
+
+ //       }
+//    }
 }

@@ -6,7 +6,7 @@ public class WeedCollect : MonoBehaviour {
     public AudioSource _coinpickup;
 
     private void OnTriggerEnter2D(Collider2D collider2D) {
-        if (collider2D.gameObject.CompareTag("Weed")) {
+        if (collider2D.gameObject.CompareTag("White")) {
             _coinpickup.Play();
             Destroy(collider2D.gameObject);
         }
