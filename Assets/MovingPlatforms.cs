@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingPlatforms : MonoBehaviour {
     public Vector3 finishPos = Vector3.zero;
     public float speed = 0.5f;
-    private Vector3 _StartPos;
+    public Vector3 _StartPos;
     private float _trackPercent = 0;
     private int _direction = 1;
 
