@@ -6,6 +6,7 @@ using UnityEngine.Timeline;
 public class PlayerMovement : MonoBehaviour{
     public float speed = 250.0f;
     public float jumpForce = 12.0f;
+    public float SpringJump = 23.0f;
 
     private Rigidbody2D _body;
     private Animator _anim;
@@ -66,9 +67,9 @@ public class PlayerMovement : MonoBehaviour{
                 Mathf.Sign(M) / pScale.x, 1 / pScale.y, 1);
         }
     }
-  //  private void OnCollisionEnter2D(Collision2D collision) {
-    //    if (Collider2D.gameObject.CompareTag("Spring")) {
-
- //       }
-//    }
+    private void OnTriggerEnter2D(Collider2D collider2D){
+       if (collider2D.gameObject.CompareTag("Spring")) {
+           _body.AddForce(Vector2.up * SpringJump, ForceMode2D.Impulse);
+        }
+    }
 }
