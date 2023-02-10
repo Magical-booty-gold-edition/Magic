@@ -25,8 +25,6 @@ public class PlayerMovement : MonoBehaviour{
         float M = Input.GetAxis("Horizontal") * speed;
          Vector2 movement = new Vector2(M, _body.velocity.y);
         _body.velocity = movement;
-        //float M = Input.GetAxis("Horizontal");
-        // GetComponent<Rigidbody2D>().velocity = Vector2.right * M * speed;
         Vector3 max = _box.bounds.max;
         Vector3 min = _box.bounds.min;
         Vector2 corner1 = new Vector2(max.x, min.y - .1f);
@@ -37,7 +35,8 @@ public class PlayerMovement : MonoBehaviour{
         if (!Mathf.Approximately(M, 0)) {
             transform.localScale = new Vector3(Mathf.Sign(M), 1, 1); //when moving scale postive or negative 1 to face left or right.
         }                                                                  //detects if the player is on the ground or in the air.
-            if (hit != null) {
+            //detects if the player is grounded or not by using the hit variable. 
+        if (hit != null) {
             grounded = true;
         }
         //Creates an jump impulse when the space key is pressed. 
@@ -52,6 +51,7 @@ public class PlayerMovement : MonoBehaviour{
             platform = hit.GetComponent<MovingPlatforms>(); 
         }
         //either attach the player to platform or clear transform.parent.
+        //Makes the player a child of the platform.
         if (platform != null) {
             transform.parent = platform.transform;
         } else {
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour{
         }
         _anim.SetFloat("speed", Mathf.Abs(M)); //speed greater than zero.
         Vector3 pScale = Vector3.one;
-        if (platform != null) {
+        if (platform != null) { //detects if the player is on the platform.
             pScale = platform.transform.localScale;
         }
         if (M != 0) {
