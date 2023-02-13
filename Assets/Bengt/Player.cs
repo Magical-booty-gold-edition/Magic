@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Timeline;
+using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour{
+public class Player : MonoBehaviour{
     public float speed = 250.0f;
     public float jumpForce = 12.0f;
     public float SpringJump = 23.0f;
+    public short Health = 3;
 
     private Rigidbody2D _body;
     private Animator _anim;
@@ -29,7 +32,7 @@ public class PlayerMovement : MonoBehaviour{
         Vector3 min = _box.bounds.min;
         Vector2 corner1 = new Vector2(max.x, min.y - .1f);
         Vector2 corner2 = new Vector2(min.x, min.y - .2f);
-        Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
+        Collider2D hit = Physics2D.OverlapArea(corner1, corner2); 
         bool grounded = false; //changes to true if the player is on the ground and majes them 
         //able to jump.
         if (!Mathf.Approximately(M, 0)) {
@@ -66,10 +69,22 @@ public class PlayerMovement : MonoBehaviour{
             transform.localScale = new Vector3(
                 Mathf.Sign(M) / pScale.x, 1 / pScale.y, 1);
         }
+        if (Health <= 0)
+        {
+            Application.Quit();
+        }
+    }
+    public void TakeDamage(short Damage)
+    {
+        Health -= Damage;
     }
     private void OnTriggerEnter2D(Collider2D collider2D){
        if (collider2D.gameObject.CompareTag("Spring")) {
            _body.AddForce(Vector2.up * SpringJump, ForceMode2D.Impulse);
+        }
+       if (collider2D.gameObject.CompareTag("DmgObject"))
+        {
+            TakeDamage(1);
         }
     }
 }
