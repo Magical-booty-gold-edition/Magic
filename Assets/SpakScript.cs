@@ -10,17 +10,25 @@ public class SpakScript : MonoBehaviour
     [SerializeField]
     GameObject SpakPå;
 
-    public bool isPå = false; 
+    public bool isPå = false;
+    bool atLever = false;
 
     void Start()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = SpakAv.GetComponent<SpriteRenderer>().sprite; 
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void FixedUpdate()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = SpakPå.GetComponent<SpriteRenderer>().sprite;
-
-        isPå = true; 
+        if (Input.KeyDown)(KeyCode.E) && atLever);  
+        { 
+            gameObject.GetCompnent<SpriteRenderer>().sprite = SpakPå.Getcompnent<SpriteRenderer>().sprite; 
+        }
     }
+
+    void onTriggerExit2D()
+    {
+        atLever = false;
+    }
+    
 }
