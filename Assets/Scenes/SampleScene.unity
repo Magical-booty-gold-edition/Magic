@@ -9175,12 +9175,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 629237297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab2fe27605d75bb45bdf768e2d644d23, type: 3}
+  m_Script: {fileID: 11500000, guid: 75a3a619431b7f44cb8667e6414e9401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpForce: 17
-  SpringJump: 20
+  jumpForce: 16
+  SpringJump: 23
+  Health: 3
 --- !u!50 &629237299
 Rigidbody2D:
   serializedVersion: 4
