@@ -20,9 +20,9 @@ public class SpakScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.KeyDown)(KeyCode.E) && atLever);  
+        if (Input.GetKeyDown(KeyCode.E) && atLever)  
         { 
-            gameObject.GetCompnent<SpriteRenderer>().sprite = SpakPå.Getcompnent<SpriteRenderer>().sprite; 
+            gameObject.GetComponent<SpriteRenderer>().sprite = SpakPå.GetComponent<SpriteRenderer>().sprite; 
         }
     }
 
