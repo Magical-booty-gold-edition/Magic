@@ -18,7 +18,8 @@ public class MovingPlatforms : MonoBehaviour {
     void Update() {
         _trackPercent += _direction * speed * Time.deltaTime;
         float x = (finishPos.x - _StartPos.x) * _trackPercent + _StartPos.x;
-        transform.position = new Vector3(x, _StartPos.y, _StartPos.z);
+        float y = (finishPos.y - _StartPos.y) * _trackPercent + _StartPos.y;
+        transform.position = new Vector3(x, y, _StartPos.z);
 
         if ((_direction == 1 && _trackPercent > .9f) || (_direction == -1
                 && _trackPercent < .1f)) {
