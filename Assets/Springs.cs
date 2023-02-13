@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Springs : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Rigidbody2D _body;
+    public float SpringJump = 20.0f;
+    private void Start()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    }
+    private void OnTriggerEnter2D(Collider2D collider2D)
     {
-        
+        if (collider2D.gameObject.CompareTag("Spring"))
+        {
+            _body.AddForce(Vector2.up * SpringJump, ForceMode2D.Impulse);
+        }
     }
 }
