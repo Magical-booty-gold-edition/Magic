@@ -7,7 +7,6 @@ TagManager:
   - Weed
   - White
   - Spring
-  - DmgObject
   layers:
   - Default
   - TransparentFX
